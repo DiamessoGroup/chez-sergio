@@ -1,10 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <router-link class="navbar-brand" to="/">Chez Sergio</router-link>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <router-link class="nav-link" exact-active-class="active-route" to="/">Home</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" exact-active-class="active-route" to="/about">About</router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <router-view/>
   </div>
 </template>
 
@@ -28,5 +43,10 @@
       color: #42b983;
     }
   }
+}
+
+.active-route {
+  color: white !important;
+  background-color: rgba(246, 186, 127, 0.94);
 }
 </style>
