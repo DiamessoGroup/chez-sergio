@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss">
 html, body {
-  font-family: 'Garamond', serif !important;
+  font-family: 'Avenir Next', serif !important;
 }
 
 .color-accent {
