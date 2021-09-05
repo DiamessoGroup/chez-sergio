@@ -24,7 +24,7 @@ export default {
       restaurantTitle: "Chez Sergio",
       imgURL: "chezSergioBanner.jpg",
       altTextMainImage: "Pizza Image of Chez Sergio",
-      leadDescription: `Authentic Italian Pizza in a warm, friendly atmosphere to share a meal with family and friends at any time of the day or evening.`
+      leadDescription: `Authentic Italian Pizza in a warm, friendly atmosphere to share a meal with family and friends at any time of the day or evening.`,
     };
   },
 };

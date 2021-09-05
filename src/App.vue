@@ -13,13 +13,13 @@ import Footer from "@/components/Footer/Footer";
 export default {
   components: {Footer, NavBar},
   name: "App",
-}
-
+};
 </script>
 
 <style lang="scss">
-html, body {
-  font-family: 'Avenir Next', serif !important;
+html,
+body {
+  font-family: "Avenir Next", serif !important;
 }
 
 .color-accent {
