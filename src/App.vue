@@ -1,38 +1,28 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <router-link class="navbar-brand" to="/">Chez Sergio</router-link>
-        <button
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          class="navbar-toggler"
-          data-bs-target="#navbarSupportedContent"
-          data-bs-toggle="collapse"
-          type="button"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="navbarSupportedContent" class="collapse navbar-collapse">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <router-link class="nav-link" exact-active-class="active-route" to="/">Home</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" exact-active-class="active-route" to="/about">About</router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <NavBar/>
     <router-view/>
+    <Footer/>
   </div>
 </template>
 
+<script>
+import NavBar from "@/components/NavBar/NavBar";
+import Footer from "@/components/Footer/Footer";
+
+export default {
+  components: {Footer, NavBar},
+  name: "App",
+}
+
+</script>
+
 <style lang="scss">
-.active-route {
-  color: white !important;
+html, body {
+  font-family: 'Garamond', serif !important;
+}
+
+.color-accent {
   background-color: rgba(246, 186, 127, 0.94);
 }
 </style>

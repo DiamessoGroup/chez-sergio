@@ -1,20 +1,20 @@
 <template>
   <div class="home">
     <Banner/>
-    <AboutChezSergio/>
+    <AboutUs/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import AboutChezSergio from "@/components/AboutChezSergio/AboutChezSergio";
+import AboutUs from "@/components/AboutUs/AboutUs";
 import Banner from "@/components/Banner/Banner";
 
 export default {
   name: "Home",
   components: {
     Banner,
-    AboutChezSergio,
+    AboutUs,
   },
 };
 </script>
