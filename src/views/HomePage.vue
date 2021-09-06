@@ -15,7 +15,7 @@ import Reservation from "@/components/Catering/Catering";
 import Bestsellers from "@/components/BestSellers/BestSellers";
 
 export default {
-  name: "Home",
+  name: "HomePage",
   components: {
     Bestsellers,
     Reservation,

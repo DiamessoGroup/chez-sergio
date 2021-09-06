@@ -26,14 +26,3 @@ describe("Spec Banner", function () {
     expect(wrapper.find("img").element.getAttribute("src")).toBe("chezSergioBanner.jpg");
   });
 });
-
-test("should display chezSergioBanner picture 2", function () {
-  const wrapper = mount(Banner, {
-    data() {
-      return {
-        restaurantTitle: "Chez Sergito",
-      };
-    },
-  });
-  expect(wrapper.find("h1").text()).toEqual("Chez Sergito");
-});
