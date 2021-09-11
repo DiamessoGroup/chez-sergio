@@ -7,10 +7,8 @@ import ProductItem from "@/components/ProductItem/ProductItem";
 
 export default {
   name: "ProductDetailPage",
-  components: { ProductItem }
-}
+  components: { ProductItem },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

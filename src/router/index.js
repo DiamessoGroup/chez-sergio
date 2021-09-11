@@ -28,6 +28,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "ProductDetailPage" */ "@/views/ProductDetailPage"),
   },
   {
+    path: "/cart",
+    name: "CartPage",
+    component: () => import(/* webpackChunkName: "Cart" */ "@/views/CartPage"),
+  },
+  {
     path: "/*",
     redirect: { name: "Home" },
   },

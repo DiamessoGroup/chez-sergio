@@ -11,7 +11,7 @@ import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
 
 export default {
-  components: {Footer, NavBar},
+  components: { Footer, NavBar },
   name: "App",
 };
 </script>
@@ -24,5 +24,22 @@ body {
 
 .color-accent {
   background-color: rgba(246, 186, 127, 0.94);
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #ff9300;
+}
+
+.theme-color {
+  color: #ff9300;
+}
+
+.theme-color-background {
+  color: #ff9300;
 }
 </style>

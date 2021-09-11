@@ -1,0 +1,5 @@
+# Contactdetailinfo
+
+## Usage
+
+    <ContactDetailInfo />

@@ -8,11 +8,9 @@
 import Menu from "@/components/Menu/Menu";
 
 export default {
-  name: "OurMenu",
-  components: { Menu }
-}
+  name: "MenuPage",
+  components: { Menu },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
