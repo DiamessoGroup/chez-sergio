@@ -6,4 +6,4 @@
 
 ### Description
 
-It will display the navigation links.
+Displays the navigation links.

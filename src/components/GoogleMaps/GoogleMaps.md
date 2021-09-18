@@ -6,5 +6,4 @@
 
 ### Description
 
-It will display the Google Map for Chez Sergio.
-
+Displays the Google Map for Chez Sergio.

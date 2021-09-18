@@ -109,9 +109,14 @@ table.shopping-cart-table tr td:last-child {
 
   &:hover {
     color: black;
+    text-decoration: underline;
   }
 }
 
 .input-number {
   width: 3em;
+}
+
+.removeItem {
+  cursor: pointer;
 }

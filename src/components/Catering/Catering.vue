@@ -7,7 +7,7 @@
         We offer full-service catering for any event, large or small. We understand your needs and we will cater the
         food to satisfy the biggest criteria of them all, both look and taste. Do not hesitate to contact us.
       </p>
-      <p class="w3-text-blue-grey w3-large"><b>Chez Sergio, 195 Dundas Street, M5G 1C7 TORONTO, ON</b></p>
+      <p class="w3-text-black w3-large"><b>Chez Sergio, 195 Dundas Street, M5G 1C7 TORONTO, ON</b></p>
       <p>You can also contact us by phone +1.409.553.2323 or email hello@chezsergio.com</p>
       <form action="" target="_blank">
         <p><input class="w3-input w3-padding-16" name="Name" placeholder="Name" required="" type="text"/></p>
