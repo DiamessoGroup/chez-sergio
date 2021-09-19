@@ -19,6 +19,7 @@ describe("Spec Bestsellers", function () {
       price: 35,
       description: "Our classic pizza with secret recipe tomato sauce, hand sliced parmesan and garnish of basil.",
       image: "/pizzas/parmesana-pizza.jpg",
+      quantity: 1,
     };
     const wrapper = mount(Bestsellers);
     //expect(wrapper.vm.products).toEqual(expect.arrayContaining(expected));

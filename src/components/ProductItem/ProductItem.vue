@@ -32,25 +32,18 @@
                 </div>
                 <form class="mb-grid-gutter" method="post">
                   <div v-if="isItemInCart" class="mb-3 d-flex align-items-center">
-                    <select class="form-select me-3" style="width: 5rem">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
                     <button class="btn btn-secondary btn-shadow d-block w-100 itemInCart" @click.prevent="">
                       This pizza is in your cart
                     </button>
                   </div>
                   <div v-else class="mb-3 d-flex align-items-center">
-                    <select class="form-select me-3" style="width: 5rem">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
+                    <!--                    <select class="form-select me-3" style="width: 5rem">-->
+                    <!--                      <option value="1">1</option>-->
+                    <!--                      <option value="2">2</option>-->
+                    <!--                      <option value="3">3</option>-->
+                    <!--                      <option value="4">4</option>-->
+                    <!--                      <option value="5">5</option>-->
+                    <!--                    </select>-->
                     <button class="btn btn-primary btn-shadow d-block w-100" @click.prevent="addToCart">
                       <i class="ci-cart fs-lg me-2"></i>Add to Cart
                     </button>

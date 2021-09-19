@@ -25,12 +25,12 @@ import router from "@/router";
 
 export default {
   name: "BestSellers",
+  router: router,
   data() {
     return {
       products,
     };
   },
-  router: router,
 };
 </script>
 
