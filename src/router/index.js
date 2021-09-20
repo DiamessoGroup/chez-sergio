@@ -33,6 +33,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "Cart" */ "@/views/CartPage"),
   },
   {
+    path: "/checkout",
+    name: "CheckoutPage",
+    component: () => import(/* webpackChunkName: "Cart" */ "@/views/CheckoutPage"),
+  },
+  {
     path: "/*",
     redirect: { name: "Home" },
   },

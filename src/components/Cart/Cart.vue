@@ -9,7 +9,10 @@
           <div class="col-md-9">
             <div class="ibox">
               <div class="ibox-title">
-                <span class="pull-right">(<strong>{{ cartLength }}</strong>) items</span>
+                <span class="pull-right"
+                >(<strong>{{ cartLength }}</strong
+                >) items</span
+                >
                 <h5>Items in your cart</h5>
               </div>
               <div v-for="(item, index) in cartItems" :key="index" class="ibox-content">
@@ -25,18 +28,25 @@
                             <div class="d-flex justify-content-between">
                               <div>
                                 <h3>
-                                  <router-link :to="{ name: 'ProductDetail', params: { id: item.id } }"
-                                               class="product-link">
+                                  <router-link
+                                    :to="{ name: 'ProductDetail', params: { id: item.id } }"
+                                    class="product-link"
+                                  >
                                     {{ item.name }}
                                   </router-link>
                                 </h3>
                                 <p class="small">
                                   {{ item.description }}
                                 </p>
-                                <p class="mb-3 text-muted text-uppercase small">Unit Price: ${{ item.price }}</p></div>
+                                <p class="mb-3 text-muted text-uppercase small">Unit Price: ${{ item.price }}</p>
+                              </div>
                               <div>
                                 <div class="def-number-input number-input safari_only mb-0 w-100">
-                                  <select v-model="item.quantity" class="form-select me-3">
+                                  <select
+                                    :value="item.quantity"
+                                    class="form-select me-3"
+                                    @input="updateQuantity(item, $event.target.value)"
+                                  >
                                     <option selected value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -49,9 +59,14 @@
                             <div class="d-flex justify-content-between align-items-center">
                               <div class="m-t-sm col-sm-1">
                                 <a class="btn btn-outline-danger removeItem" @click="removeItem(item)"
-                                ><i class="fa fa-trash"></i></a>
+                                ><i class="fa fa-trash"></i
+                                ></a>
                               </div>
-                              <h4 class="mb-0"><span><strong>${{ item.quantity * item.price }}</strong></span></h4>
+                              <h4 class="mb-0">
+                                <span
+                                ><strong>${{ item.quantity * item.price }}</strong></span
+                                >
+                              </h4>
                             </div>
                           </div>
                         </div>
@@ -61,14 +76,16 @@
                 </div>
               </div>
               <div class="ibox-content">
-                <router-link :to="{ name: 'Menu'}">
-                  <button class="btn btn-white pull-left d-none d-sm-block"><i class="fa fa-arrow-left"></i> Continue
-                    shopping
+                <router-link :to="{ name: 'Menu' }">
+                  <button class="btn btn-white pull-left d-none d-sm-block">
+                    <i class="fa fa-arrow-left"></i> Continue shopping
                   </button>
                 </router-link>
-                <button v-if="cartLength !== 0" class="btn btn-primary pull-right"><i
-                  class="fa fa fa-shopping-cart"></i> Checkout
-                </button>
+                <router-link :to="{ name: 'CheckoutPage' }">
+                  <button v-if="cartLength !== 0" class="btn btn-primary pull-right">
+                    <i class="fa fa fa-shopping-cart"></i> Checkout
+                  </button>
+                </router-link>
               </div>
             </div>
           </div>
@@ -83,7 +100,9 @@
                 <hr/>
                 <div v-if="cartLength !== 0" class="m-t-sm">
                   <div class="btn-group">
-                    <a class="btn btn-primary btn-sm" href="#"><i class="fa fa-shopping-cart"></i> Checkout</a>
+                    <router-link :to="{ name: 'CheckoutPage' }" class="btn btn-primary btn-sm"
+                    ><i class="fa fa-shopping-cart"></i> Checkout
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -106,29 +125,29 @@
 </template>
 
 <script>
-import data from "@/data";
 import router from "@/router";
+import { mapState } from "vuex";
 
 export default {
   name: "Cart",
   router: router,
-  data() {
-    return {
-      cartItems: data.cartItems,
-    };
-  },
   computed: {
     cartLength() {
-      return this.cartItems.length;
+      return this.$store.getters.cartLengthGetter;
     },
     totalBalance() {
-      return this.cartItems.map((item) => item.price * item.quantity).reduce((prev, next) => prev + next, 0);
+      return this.$store.getters.totalBalanceGetter;
     },
+    ...mapState({
+      cartItems: "cartItems",
+    }),
   },
   methods: {
     removeItem(item) {
-      const index = this.cartItems.indexOf(item);
-      this.cartItems.splice(index, 1);
+      this.$store.dispatch("removeItemAction", item);
+    },
+    updateQuantity(item, value) {
+      this.$store.dispatch("updateQuantityAction", { item, value });
     },
   },
 };

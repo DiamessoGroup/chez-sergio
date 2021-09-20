@@ -39,7 +39,7 @@ import router from "@/router";
 
 export default {
   name: "NavBar",
-  router: router,
+  router,
 };
 </script>
 
