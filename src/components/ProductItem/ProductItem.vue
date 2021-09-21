@@ -22,7 +22,11 @@
             <div class="col-lg-5 pt-4 pt-lg-0">
               <div class="product-details ms-auto pb-3">
                 <div class="mb-3">
-                  <span class="h3 fw-normal text-accent me-1">{{ product.name }}</span>
+                  <span class="h3 fw-normal text-accent me-1">{{ product.name }} <span
+                    v-if="quantityInCart(product) > 0"
+                    class="badge rounded-pill badge-add badge-add-product-item">{{
+                      quantityInCart(product)
+                    }}</span></span>
                 </div>
                 <div class="mb-3">
                   <span class="h3 fw-normal text-accent me-1">${{ product.price }}</span>
@@ -31,9 +35,14 @@
                   <span class="h4 fw-normal text-accent me-1">{{ product.description }}</span>
                 </div>
                 <form class="mb-grid-gutter" method="post">
+                  <!--                  <div v-if="isItemInCart" class="mb-3 d-flex align-items-center">-->
+                  <!--                    <button class="btn btn-secondary btn-shadow d-block w-100 itemInCart" @click.prevent="">-->
+                  <!--                      This item is in your cart-->
+                  <!--                    </button>-->
+                  <!--                  </div>-->
                   <div v-if="isItemInCart" class="mb-3 d-flex align-items-center">
-                    <button class="btn btn-secondary btn-shadow d-block w-100 itemInCart" @click.prevent="">
-                      This pizza is in your cart
+                    <button class="btn btn-danger btn-shadow d-block w-100" @click.prevent="removeFromCart">
+                      Remove item from cart
                     </button>
                   </div>
                   <div v-else class="mb-3 d-flex align-items-center">
@@ -41,6 +50,7 @@
                       <i class="ci-cart fs-lg me-2"></i>Add to Cart
                     </button>
                   </div>
+
                 </form>
                 <!-- Product panels-->
                 <div id="productPanels" class="accordion mb-4">
@@ -101,11 +111,17 @@ export default {
     addToCart() {
       this.$store.dispatch("addToCartAction", this.product);
     },
+    removeFromCart() {
+      this.$store.dispatch("removeItemAction", this.product);
+    }
   },
   computed: {
     isItemInCart() {
       return this.$store.getters.isItemInCartGetter(this.product.id);
     },
+    quantityInCart() {
+      return (item) => this.$store.getters.quantityInCartGetter(item)
+    }
   },
 };
 </script>

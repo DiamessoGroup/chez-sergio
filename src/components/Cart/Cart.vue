@@ -140,7 +140,7 @@ export default {
     },
     ...mapState({
       cartItems: "cartItems",
-    }),
+    })
   },
   methods: {
     removeItem(item) {

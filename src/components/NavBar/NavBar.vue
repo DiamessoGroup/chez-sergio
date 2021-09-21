@@ -7,7 +7,7 @@
             :to="{ name: 'Home' }"
             class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
           >
-            <img alt="Chez Sergio Logo" height="32" src="chez-sergio-logo-3.png" width="40"/>
+            <img alt="Chez Sergio Logo" height="32" src="../../assets/chez-sergio-logo-3.png" width="40"/>
           </router-link>
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li class="nav-link px-2 text-secondary">
@@ -25,7 +25,11 @@
 
           <div class="text-end">
             <router-link :to="{ name: 'CartPage' }">
-              <button class="btn btn-warning" type="button">Cart</button>
+              <button class="btn btn-warning" type="button">Cart <span
+                v-if="cartLength >0 " class="badge rounded-pill badge-add badge-add-nav-bar">{{
+                  cartLength
+                }}</span>
+              </button>
             </router-link>
           </div>
         </div>
@@ -36,10 +40,16 @@
 
 <script>
 import router from "@/router";
+import { mapGetters } from "vuex";
 
 export default {
   name: "NavBar",
   router,
+  computed: {
+    ...mapGetters({
+      cartLength: "cartLengthGetter",
+    }),
+  },
 };
 </script>
 

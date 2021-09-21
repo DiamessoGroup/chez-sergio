@@ -11,8 +11,9 @@ export default new Vuex.Store({
     cartItems: data.cartItems,
   },
   mutations: {
-    addToCartMutation(state, payload) {
-      state.cartItems.push(payload);
+    addToCartMutation(state, product) {
+      product.quantity = 1;
+      state.cartItems.push(product);
     },
     removeItemMutation(state, item) {
       const index = state.cartItems.indexOf(item);
@@ -43,6 +44,14 @@ export default new Vuex.Store({
     },
     totalBalanceGetter: (state) => {
       return state.cartItems.map((item) => item.price * item.quantity).reduce((prev, next) => prev + next, 0);
+    },
+    quantityInCartGetter: (state) => (product) => {
+      if (state.cartItems.some((elem) => elem.name === product.name)) {
+        const index = state.cartItems.findIndex((element) => element.name === product.name);
+        return state.cartItems[index].quantity;
+      } else {
+        return 0;
+      }
     },
   },
 });

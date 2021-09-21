@@ -1,6 +1,6 @@
 <template>
   <div class="BestSellers">
-    <div id="about" class="w3-container best-sellers-back-color" style="padding: 128px 16px">
+    <div id="about" class="w3-container menu-back-color" style="padding: 128px 16px">
       <h2 class="w3-center">Our Best Sellers</h2>
       <p class="w3-center w3-large">Your Favorite Pizza awaits you</p>
       <ProductList :products="bestSellers"/>

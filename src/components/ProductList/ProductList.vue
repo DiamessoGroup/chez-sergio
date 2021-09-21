@@ -5,7 +5,12 @@
         <router-link :to="{ name: 'ProductDetail', params: { id: product.id } }">
           <img :alt="product.name" :src="product.image" class="image" style="width: 100%"/>
         </router-link>
-        <p class="w3-large w3-margin-top w3-text-orange name">{{ product.name }}</p>
+        <p class="w3-large w3-margin-top w3-text-orange name">
+          {{ product.name }}
+          <span v-if="quantityInCartGetter(product) > 0" class="badge rounded-pill badge-product-list badge-add">{{
+              quantityInCartGetter(product)
+            }}</span>
+        </p>
         <p class="w3-large w3-margin-top price">${{ product.price }}</p>
         <p class="w3-margin-top w3-margin-bottom description">
           {{ product.description }}
@@ -16,6 +21,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "ProductList",
   props: {
@@ -23,5 +30,12 @@ export default {
       type: Array,
     },
   },
+  computed: {
+    ...mapGetters(["quantityInCartGetter"]),
+  },
 };
 </script>
+
+<style lang="scss">
+@import "ProductList";
+</style>

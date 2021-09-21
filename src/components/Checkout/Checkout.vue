@@ -2,7 +2,7 @@
   <div class="Checkout">
     <div class="container">
       <main>
-        <div class="row g-5 py-5">
+        <div class="row g-5">
           <div class="col-md-5 col-lg-4 order-md-last">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
               <span class="text-primary">Your cart</span>
@@ -20,7 +20,7 @@
                 <span class="text-muted">${{ item.price * item.quantity }}</span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
-                <span>Total (USD)</span>
+                <span>Total (CAD)</span>
                 <strong>${{ totalBalance }}</strong>
               </li>
             </ul>
@@ -156,3 +156,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import "Checkout";
+</style>

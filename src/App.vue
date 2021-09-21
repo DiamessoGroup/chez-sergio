@@ -42,4 +42,18 @@ body {
 .theme-color-background {
   color: #ff9300;
 }
+
+.badge-add {
+  background-color: #3a2c2c;
+  padding: 0.25em 0.45em !important;
+  font-size: 0.75em;
+  font-weight: 600 !important;
+  line-height: 1;
+  color: #ff9800 !important;
+}
+
+.menu-back-color {
+  background-color: #1a1a1a;
+  color: white;
+}
 </style>

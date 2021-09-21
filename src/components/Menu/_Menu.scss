@@ -1,2 +1,11 @@
 .Menu {
 }
+
+.category-pill {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
