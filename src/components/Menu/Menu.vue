@@ -4,19 +4,19 @@
       <!-- Nav tabs -->
       <ul class="nav justify-content-center">
         <li class="nav-item">
-          <span class="category-pill" href="#">All Items</span>
+          <span class="category-pill">All Items</span>
         </li>
         <li class="nav-item">
-          <span class="category-pill" href="#">Vegetarian</span>
+          <span class="category-pill">Vegetarian</span>
         </li>
         <li class="nav-item">
-          <span class="category-pill" href="#">Meat Extravaganza</span>
+          <span class="category-pill">Meat Extravaganza</span>
         </li>
         <li class="nav-item">
-          <span class="category-pill" href="#">Seafood</span>
+          <span class="category-pill">Seafood</span>
         </li>
         <li class="nav-item">
-          <span class="category-pill" href="#">Beverage</span>
+          <span class="category-pill">Spicy</span>
         </li>
       </ul>
       <ProductList :products="products"/>
