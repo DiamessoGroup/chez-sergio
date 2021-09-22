@@ -5,7 +5,7 @@ const products = [
     price: 35,
     description: "Our classic pizza with secret recipe tomato sauce, hand sliced parmesan and garnish of basil.",
     image: "/pizzas/parmesana-pizza.jpg",
-    categories: [],
+    categories: ["Vegetarian", "All"],
     quantity: 1,
   },
   {
@@ -15,7 +15,7 @@ const products = [
     description:
       "Extra hand sliced mozzarella, garlic, and an olive oil drizzle. Topped with our signature cheese and spice blend.",
     image: "/pizzas/mexicana-pizza.jpg",
-    categories: [],
+    categories: ["Meat", "Spicy", "All"],
     quantity: 1,
   },
   {
@@ -24,7 +24,7 @@ const products = [
     price: 39,
     description: "Our classic white pizza topped with thinly sliced prosciutto, shaved cheese blend and fresh arugula.",
     image: "/pizzas/francesa-pizza.jpg",
-    categories: [],
+    categories: ["Meat", "All"],
     quantity: 1,
   },
   {
@@ -34,7 +34,7 @@ const products = [
     description:
       "A spin on our traditional pizza with Sweet Baby Ray’s Barbecue Sauce, chicken, smoky bacon, red onion and garnished with fresh cilantro.",
     image: "/pizzas/dolce-vita-pizza.jpg",
-    categories: [],
+    categories: ["Meat", "All"],
     quantity: 1,
   },
   {
@@ -44,7 +44,7 @@ const products = [
     description:
       "Oven Roasted Red Peppers, Creamy Ricotta Cheese And Hand Pinched Italian Sausage, atop Our Traditional Pizza.",
     image: "/pizzas/brooklyn-bridge-pizza.jpg",
-    categories: [],
+    categories: ["Meat", "Spicy", "All"],
     quantity: 1,
   },
   {
@@ -53,7 +53,7 @@ const products = [
     price: 49,
     description: "White Sauce and Mozzarella, Smoked Shrimp topped with Cream Cheese, Fresh Red Onion.",
     image: "/pizzas/neptunes-pizza.jpg",
-    categories: [],
+    categories: ["Seafood", "All"],
     quantity: 1,
   },
   {
@@ -62,7 +62,7 @@ const products = [
     price: 25,
     description: "Our secret recipe tomato sauce, hand sliced mozzarella and garnish of basil.",
     image: "/pizzas/margherita-white-pizza.jpg",
-    categories: [],
+    categories: ["Vegetarian", "All"],
     quantity: 1,
   },
   {
@@ -70,9 +70,9 @@ const products = [
     name: "Calabrasi Norgina",
     price: 28,
     description:
-      "Creamy white sauce, peas, olive and Italian sausage. Topped with our signature cheese and spice blend.",
+      "Creamy white sauce, peas, olive and Italian salmon. Topped with our signature cheese and spice blend.",
     image: "/pizzas/calabrasi-norgina-pizza.jpg",
-    categories: [],
+    categories: ["Seafood", "Spicy", "All"],
     quantity: 1,
   },
   {
@@ -81,7 +81,7 @@ const products = [
     price: 29,
     description: "Tomato garlic sauce, mozzarella, ricotta and pesto on our homemade gluten free dough.",
     image: "/pizzas/madonna-pizza.jpg",
-    categories: [],
+    categories: ["Vegetarian", "All"],
     quantity: 1,
   },
 ];
