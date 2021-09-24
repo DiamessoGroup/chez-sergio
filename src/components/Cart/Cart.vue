@@ -15,7 +15,7 @@
                 >
                 <h5>Items in your cart</h5>
               </div>
-              <div v-for="(item, index) in cartItems" :key="index" class="ibox-content">
+              <div v-for="(item, index) in cartItems2" :key="index" class="ibox-content">
                 <div>
                   <div>
                     <div>
@@ -140,6 +140,7 @@ export default {
     },
     ...mapState({
       cartItems: "cartItems",
+      cartItems2: "cartItems2"
     })
   },
   methods: {

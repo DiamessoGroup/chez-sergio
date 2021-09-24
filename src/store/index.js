@@ -1,14 +1,17 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import data from "@/data";
+import api from "@/api";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    products: data.products,
-    bestSellers: data.bestSellers,
     cartItems: data.cartItems,
+    products: [],
+    filteredProducts: [],
+    bestSellers: [],
+    cartItems2: [],
   },
   mutations: {
     addToCartMutation(state, product) {
@@ -23,16 +26,44 @@ export default new Vuex.Store({
       const index = state.cartItems.indexOf(item);
       state.cartItems[index].quantity = Number(value);
     },
+    getPizzasMutation(state, payload) {
+      state.products = payload;
+      state.filteredProducts = payload;
+    },
+    filterCategoryMutation(state, category) {
+      state.filteredProducts = state.products.filter((item) => item.categories.includes(category));
+    },
+    bestSellerMutation(state) {
+      state.bestSellers = state.products.filter((item) => item.best_seller === true);
+    },
+    getCartItemsMutation(state, payload) {
+      state.cartItems2 = payload;
+    },
   },
   actions: {
-    async addToCartAction({ commit }, payload) {
-      commit("addToCartMutation", await payload);
+    addToCartAction({}, payload) {
+      api.addItemToCart(payload);
+      //commit("addToCartMutation", await payload);
     },
     async removeItemAction({ commit }, payload) {
       commit("removeItemMutation", await payload);
     },
     async updateQuantityAction({ commit }, item, value) {
       commit("updateQuantityMutation", await item, await value);
+    },
+    async getPizzasAction({ commit }) {
+      const response = await api.getPizzas();
+      commit("getPizzasMutation", response.data);
+    },
+    async filterCategoryAction({ commit }, category) {
+      commit("filterCategoryMutation", category);
+    },
+    bestSellerAction({ commit }) {
+      commit("bestSellerMutation");
+    },
+    async getCartItemsAction({ commit }) {
+      const response = await api.getCartItems();
+      commit("getCartItemsMutation", response);
     },
   },
   getters: {

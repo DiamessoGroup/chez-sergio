@@ -12,17 +12,21 @@
 import router from "@/router";
 import store from "@/store";
 import ProductList from "@/components/ProductList/ProductList";
-import { mapState } from "vuex";
 
 export default {
   name: "BestSellers",
   components: { ProductList },
   router,
   store,
+  created() {
+    this.$store.dispatch("getPizzasAction").then(() => {
+      this.$store.dispatch("bestSellerAction")
+    })
+  },
   computed: {
-    ...mapState({
-      bestSellers: "bestSellers",
-    }),
+    bestSellers() {
+      return this.$store.state.bestSellers
+    }
   },
 };
 </script>
