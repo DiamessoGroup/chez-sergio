@@ -15,9 +15,10 @@
                 class="list-group-item d-flex justify-content-between lh-sm"
               >
                 <div>
-                  <h6 class="my-0">{{ item.name }} (${{ item.price }} x {{ item.quantity }})</h6>
+                  <h6 class="my-0">{{ products[item.pizza_id].name }} (${{ products[item.pizza_id].price }} x
+                    {{ item.quantity }})</h6>
                 </div>
-                <span class="text-muted">${{ item.price * item.quantity }}</span>
+                <span class="text-muted">${{ products[item.pizza_id].price * item.quantity }}</span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (CAD)</span>
@@ -145,6 +146,7 @@ export default {
   name: "Checkout",
   computed: {
     ...mapState({
+      products: "products",
       cartItems: "cartItems",
     }),
     cartLength() {

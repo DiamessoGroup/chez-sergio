@@ -25,10 +25,11 @@
 
           <div class="text-end">
             <router-link :to="{ name: 'CartPage' }">
-              <button class="btn btn-warning" type="button">Cart <span
-                v-if="cartLength >0 " class="badge rounded-pill badge-add badge-add-nav-bar">{{
-                  cartLength
-                }}</span>
+              <button class="btn btn-warning" type="button">
+                Cart
+                <span v-if="cartLength > 0" class="badge rounded-pill badge-add badge-add-nav-bar">{{
+                    cartLength
+                  }}</span>
               </button>
             </router-link>
           </div>
@@ -49,6 +50,11 @@ export default {
     ...mapGetters({
       cartLength: "cartLengthGetter",
     }),
+  },
+  async created() {
+    await this.$store.dispatch("getCartItemsAction");
+    await this.$store.dispatch("getPizzasAction");
+    await this.$store.dispatch("bestSellerAction");
   },
 };
 </script>

@@ -22,11 +22,14 @@
             <div class="col-lg-5 pt-4 pt-lg-0">
               <div class="product-details ms-auto pb-3">
                 <div class="mb-3">
-                  <span class="h3 fw-normal text-accent me-1">{{ product.name }} <span
-                    v-if="quantityInCart(product) > 0"
-                    class="badge rounded-pill badge-add badge-add-product-item">{{
-                      quantityInCart(product)
-                    }}</span></span>
+                  <span class="h3 fw-normal text-accent me-1"
+                  >{{ product.name }}
+                    <span
+                      v-if="quantityInCart(product) > 0"
+                      class="badge rounded-pill badge-add badge-add-product-item"
+                    >{{ quantityInCart(product) }}</span
+                    ></span
+                  >
                 </div>
                 <div class="mb-3">
                   <span class="h3 fw-normal text-accent me-1">${{ product.price }}</span>
@@ -40,7 +43,7 @@
                   <!--                      This item is in your cart-->
                   <!--                    </button>-->
                   <!--                  </div>-->
-                  <div v-if="isItemInCart" class="mb-3 d-flex align-items-center">
+                  <div v-if="isItemInCart(product.id)" class="mb-3 d-flex align-items-center">
                     <button class="btn btn-danger btn-shadow d-block w-100" @click.prevent="removeFromCart">
                       Remove item from cart
                     </button>
@@ -50,7 +53,6 @@
                       <i class="ci-cart fs-lg me-2"></i>Add to Cart
                     </button>
                   </div>
-
                 </form>
                 <!-- Product panels-->
                 <div id="productPanels" class="accordion mb-4">
@@ -85,13 +87,14 @@
       </div>
     </div>
     <div v-else>
-      <p class="w3-center">Loading....</p>
+      <div class="d-flex justify-content-center w3-margin-top">
+        <div class="spinner-border" role="status" style="width: 5rem; height: 5rem"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import data from "@/data";
 import router from "@/router";
 import store from "@/store";
 
@@ -105,23 +108,26 @@ export default {
     };
   },
   async created() {
-    this.product = await data.products.find((element) => element.id === Number(this.$route.params.id));
+    await this.$store.dispatch("getPizzasAction")
+    this.product = this.$store.state.products.find((product) => product.id === Number(this.$route.params.id));
   },
   methods: {
     addToCart() {
-      this.$store.dispatch("addToCartAction", this.product);
+      this.$store.dispatch("addToCartAction", this.product.id);
     },
     removeFromCart() {
-      this.$store.dispatch("removeItemAction", this.product);
-    }
+      //find product in cart where pizza_id =
+      const cartItemToBeRemoved = this.$store.state.cartItems.find((cartItem) => cartItem.pizza_id === this.product.id);
+      this.$store.dispatch("removeItemAction", cartItemToBeRemoved);
+    },
   },
   computed: {
     isItemInCart() {
-      return this.$store.getters.isItemInCartGetter(this.product.id);
+      return (item) => this.$store.getters.isItemInCartGetter(item);
     },
     quantityInCart() {
-      return (item) => this.$store.getters.quantityInCartGetter(item)
-    }
+      return (item) => this.$store.getters.quantityInCartGetter(item);
+    },
   },
 };
 </script>

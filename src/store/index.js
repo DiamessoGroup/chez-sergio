@@ -1,30 +1,29 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import data from "@/data";
 import api from "@/api";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    cartItems: data.cartItems,
+    cartItems: [],
     products: [],
     filteredProducts: [],
     bestSellers: [],
-    cartItems2: [],
   },
   mutations: {
-    addToCartMutation(state, product) {
-      product.quantity = 1;
-      state.cartItems.push(product);
+    addToCartMutation(state, payload) {
+      state.cartItems = payload;
+      // product.quantity = 1;
+      // state.cartItems2.push(product);
     },
-    removeItemMutation(state, item) {
-      const index = state.cartItems.indexOf(item);
-      state.cartItems.splice(index, 1);
+    removeItemMutation(state, payload) {
+      state.cartItems = payload;
     },
-    updateQuantityMutation(state, { item, value }) {
-      const index = state.cartItems.indexOf(item);
-      state.cartItems[index].quantity = Number(value);
+    updateQuantityMutation(state, payload) {
+      state.cartItems = payload;
+      // const index = state.cartItems.indexOf(item);
+      // state.cartItems[index].quantity = Number(value);
     },
     getPizzasMutation(state, payload) {
       state.products = payload;
@@ -37,19 +36,27 @@ export default new Vuex.Store({
       state.bestSellers = state.products.filter((item) => item.best_seller === true);
     },
     getCartItemsMutation(state, payload) {
-      state.cartItems2 = payload;
+      state.cartItems = payload;
     },
   },
   actions: {
-    addToCartAction({}, payload) {
-      api.addItemToCart(payload);
+    async addToCartAction({ commit }, payload) {
+      await api.addItemToCart(payload);
+      const response = await api.getCartItems();
+      commit("addToCartMutation", response.data);
+
+      //commit("addToCartMutation", response.data);
       //commit("addToCartMutation", await payload);
     },
     async removeItemAction({ commit }, payload) {
-      commit("removeItemMutation", await payload);
+      await api.deleteItemFromCart(payload.id);
+      const response = await api.getCartItems();
+      commit("removeItemMutation", response.data);
     },
-    async updateQuantityAction({ commit }, item, value) {
-      commit("updateQuantityMutation", await item, await value);
+    async updateQuantityAction({ commit }, { item, newQuantity }) {
+      await api.UpdateItemQuantityInCart(item.id, newQuantity);
+      const response = await api.getCartItems();
+      commit("updateQuantityMutation", response.data);
     },
     async getPizzasAction({ commit }) {
       const response = await api.getPizzas();
@@ -63,26 +70,34 @@ export default new Vuex.Store({
     },
     async getCartItemsAction({ commit }) {
       const response = await api.getCartItems();
-      commit("getCartItemsMutation", response);
+      commit("getCartItemsMutation", response.data);
     },
   },
   getters: {
     isItemInCartGetter: (state) => (id) => {
-      return state.cartItems.some((elem) => elem.id === id);
+      return state.cartItems.some((elem) => elem.pizza_id === id);
     },
     cartLengthGetter: (state) => {
       return state.cartItems.length;
     },
     totalBalanceGetter: (state) => {
-      return state.cartItems.map((item) => item.price * item.quantity).reduce((prev, next) => prev + next, 0);
+      return state.cartItems
+        .map((item) => state.products[item.pizza_id].price * item.quantity)
+        .reduce((prev, next) => prev + next, 0);
     },
-    quantityInCartGetter: (state) => (product) => {
-      if (state.cartItems.some((elem) => elem.name === product.name)) {
-        const index = state.cartItems.findIndex((element) => element.name === product.name);
+    quantityInCartGetter: (state) => (pizza) => {
+      if (state.cartItems.some((cartItem) => cartItem.pizza_id === pizza.id)) {
+        const index = state.cartItems.findIndex((cartItem) => cartItem.pizza_id === pizza.id);
         return state.cartItems[index].quantity;
       } else {
         return 0;
       }
+    },
+    bestSellerGetter: (state) => {
+      return state.bestSellers;
+    },
+    filteredProductsGetter: (state) => {
+      return state.filteredProducts;
     },
   },
 });

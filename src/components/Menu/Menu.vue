@@ -20,39 +20,34 @@
             <span class="category-pill" @click="filterCategory('Spicy')">Spicy</span>
           </li>
         </ul>
-        <ProductList :products="filteredProducts"/>
+        <ProductList :pizzas="filteredProducts"/>
       </div>
       <div v-else>
         <div class="d-flex justify-content-center">
-          <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
-          </div>
+          <div class="spinner-border" role="status" style="width: 5rem; height: 5rem"></div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
 import ProductList from "@/components/ProductList/ProductList";
-import store from "@/store"
+import store from "@/store";
 
 export default {
   name: "Menu",
   components: { ProductList },
-  created() {
-    this.$store.dispatch("getPizzasAction")
-  },
   store,
   computed: {
     filteredProducts() {
-      return this.$store.state.filteredProducts
-    }
+      return this.$store.getters.filteredProductsGetter
+    },
   },
   methods: {
     filterCategory(category) {
-      this.$store.dispatch("filterCategoryAction", category)
-    }
+      this.$store.dispatch("filterCategoryAction", category);
+    },
   },
 };
 </script>

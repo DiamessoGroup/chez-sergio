@@ -1,6 +1,6 @@
 <template>
   <div class="Cart">
-    <div class="container">
+    <div v-if="products" class="container">
       <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
           <div v-if="cartLength === 0" class="col-md-9 mb-3">
@@ -15,64 +15,77 @@
                 >
                 <h5>Items in your cart</h5>
               </div>
-              <div v-for="(item, index) in cartItems2" :key="index" class="ibox-content">
-                <div>
+              <div v-if="cartItems">
+                <div v-for="(cartItem, index) in cartItems" :key="index" class="ibox-content">
                   <div>
                     <div>
-                      <div class="row">
-                        <div class="col-md-5 col-lg-3 col-xl-3">
-                          <img :alt="item.name" :src="item.image" class="img-fluid mb-2"/>
-                        </div>
-                        <div class="col-md-7 col-lg-9 col-xl-9">
-                          <div>
-                            <div class="d-flex justify-content-between">
-                              <div>
-                                <h3>
-                                  <router-link
-                                    :to="{ name: 'ProductDetail', params: { id: item.id } }"
-                                    class="product-link"
-                                  >
-                                    {{ item.name }}
-                                  </router-link>
-                                </h3>
-                                <p class="small">
-                                  {{ item.description }}
-                                </p>
-                                <p class="mb-3 text-muted text-uppercase small">Unit Price: ${{ item.price }}</p>
-                              </div>
-                              <div>
-                                <div class="def-number-input number-input safari_only mb-0 w-100">
-                                  <select
-                                    :value="item.quantity"
-                                    class="form-select me-3"
-                                    @input="updateQuantity(item, $event.target.value)"
-                                  >
-                                    <option selected value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                  </select>
+                      <div>
+                        <div class="row">
+                          <div class="col-md-5 col-lg-3 col-xl-3">
+                            <img
+                              :alt="products[cartItem.pizza_id].name"
+                              :src="products[cartItem.pizza_id].image"
+                              class="img-fluid mb-2"
+                            />
+                          </div>
+                          <div class="col-md-7 col-lg-9 col-xl-9">
+                            <div>
+                              <div class="d-flex justify-content-between">
+                                <div>
+                                  <h3>
+                                    <router-link
+                                      :to="{ name: 'ProductDetail', params: { id: products[cartItem.pizza_id].id } }"
+                                      class="product-link"
+                                    >
+                                      {{ products[cartItem.pizza_id].name }}
+                                    </router-link>
+                                  </h3>
+                                  <p class="small">
+                                    {{ products[cartItem.pizza_id].description }}
+                                  </p>
+                                  <p class="mb-3 text-muted text-uppercase small">
+                                    Unit Price: ${{ products[cartItem.pizza_id].price }}
+                                  </p>
+                                </div>
+                                <div>
+                                  <div class="def-number-input number-input safari_only mb-0 w-100">
+                                    <select
+                                      :value="cartItem.quantity"
+                                      class="form-select me-3"
+                                      @input="updateQuantity(cartItem, $event.target.value)"
+                                    >
+                                      <option selected value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                    </select>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                              <div class="m-t-sm col-sm-1">
-                                <a class="btn btn-outline-danger removeItem" @click="removeItem(item)"
-                                ><i class="fa fa-trash"></i
-                                ></a>
+                              <div class="d-flex justify-content-between align-items-center">
+                                <div class="m-t-sm col-sm-1">
+                                  <a class="btn btn-outline-danger removeItem" @click="removeItem(cartItem)"
+                                  ><i class="fa fa-trash"></i
+                                  ></a>
+                                </div>
+                                <h4 class="mb-0">
+                                  <span
+                                  ><strong>${{ cartItem.quantity * products[cartItem.pizza_id].price }}</strong></span
+                                  >
+                                </h4>
                               </div>
-                              <h4 class="mb-0">
-                                <span
-                                ><strong>${{ item.quantity * item.price }}</strong></span
-                                >
-                              </h4>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div v-else>
+                <div class="d-flex justify-content-center w3-margin-top w3-margin-bottom">
+                  <div class="spinner-border" role="status" style="width: 5rem; height: 5rem"></div>
                 </div>
               </div>
               <div class="ibox-content">
@@ -121,16 +134,23 @@
         </div>
       </div>
     </div>
+    <div v-else>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status" style="width: 5rem; height: 5rem"></div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import router from "@/router";
 import { mapState } from "vuex";
+import store from "@/store";
 
 export default {
   name: "Cart",
   router: router,
+  store,
   computed: {
     cartLength() {
       return this.$store.getters.cartLengthGetter;
@@ -139,16 +159,16 @@ export default {
       return this.$store.getters.totalBalanceGetter;
     },
     ...mapState({
+      products: "products",
       cartItems: "cartItems",
-      cartItems2: "cartItems2"
-    })
+    }),
   },
   methods: {
     removeItem(item) {
       this.$store.dispatch("removeItemAction", item);
     },
-    updateQuantity(item, value) {
-      this.$store.dispatch("updateQuantityAction", { item, value });
+    updateQuantity(item, newQuantity) {
+      this.$store.dispatch("updateQuantityAction", { item, newQuantity });
     },
   },
 };
