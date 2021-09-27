@@ -17,7 +17,7 @@
               </div>
               <div v-if="cartItems">
                 <div v-for="(cartItem, index) in cartItems" :key="index" class="ibox-content">
-                  <div>
+                  <div v-if="products[cartItem.pizza_id]">
                     <div>
                       <div>
                         <div class="row">
@@ -79,6 +79,11 @@
                           </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  <div v-else>
+                    <div class="d-flex justify-content-center w3-margin-top w3-margin-bottom">
+                      <div class="spinner-border" role="status" style="width: 5rem; height: 5rem"></div>
                     </div>
                   </div>
                 </div>

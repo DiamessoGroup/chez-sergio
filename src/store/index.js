@@ -81,9 +81,11 @@ export default new Vuex.Store({
       return state.cartItems.length;
     },
     totalBalanceGetter: (state) => {
-      return state.cartItems
-        .map((item) => state.products[item.pizza_id].price * item.quantity)
-        .reduce((prev, next) => prev + next, 0);
+      if (state.products.length > 0) {
+        return state.cartItems
+          .map((item) => state.products[item.pizza_id].price * item.quantity)
+          .reduce((prev, next) => prev + next, 0);
+      }
     },
     quantityInCartGetter: (state) => (pizza) => {
       if (state.cartItems.some((cartItem) => cartItem.pizza_id === pizza.id)) {
