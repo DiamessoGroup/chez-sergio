@@ -7,7 +7,7 @@
             :to="{ name: 'Home' }"
             class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
           >
-            <img alt="Chez Sergio Logo" height="32" src="../../assets/chez-sergio-logo-3.png" width="40"/>
+            <img alt="Chez Sergio Logo" height="320" src="../../assets/chez-sergio-logo-3.png" width="400"/>
           </router-link>
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li class="nav-link px-2 text-secondary">

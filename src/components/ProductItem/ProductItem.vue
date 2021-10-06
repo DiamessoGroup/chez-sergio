@@ -44,12 +44,13 @@
                   <!--                    </button>-->
                   <!--                  </div>-->
                   <div v-if="isItemInCart(product.id)" class="mb-3 d-flex align-items-center">
-                    <button class="btn btn-danger btn-shadow d-block w-100" @click.prevent="removeFromCart">
+                    <button id="remove-cart" class="btn btn-danger btn-shadow d-block w-100"
+                            @click.prevent="removeFromCart">
                       Remove item from cart
                     </button>
                   </div>
                   <div v-else class="mb-3 d-flex align-items-center">
-                    <button class="btn btn-primary btn-shadow d-block w-100" @click.prevent="addToCart">
+                    <button id="add-cart" class="btn btn-primary btn-shadow d-block w-100" @click.prevent="addToCart">
                       <i class="ci-cart fs-lg me-2"></i>Add to Cart
                     </button>
                   </div>
@@ -108,7 +109,7 @@ export default {
     };
   },
   async created() {
-    await this.$store.dispatch("getPizzasAction")
+    await this.$store.dispatch("getPizzasAction");
     this.product = this.$store.state.products.find((product) => product.id === Number(this.$route.params.id));
   },
   methods: {

@@ -3,7 +3,7 @@
     <div class="w3-row-padding w3-center products" style="margin-top: 64px">
       <div v-for="pizza in pizzas" :key="pizza.id" class="w3-quarter w3-margin-bottom product">
         <router-link :to="{ name: 'ProductDetail', params: { id: pizza.id } }">
-          <img :alt="pizza.name" :src="pizza.image" class="image" style="width: 100%"/>
+          <img :alt="pizza.name" :src="pizza.image" class="image" data-test="image" style="width: 100%"/>
         </router-link>
         <p class="w3-large w3-margin-top w3-text-orange name">
           {{ pizza.name }}

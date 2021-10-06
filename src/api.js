@@ -1,19 +1,28 @@
 import axios from "axios";
 
+const instance = axios.create({
+  //baseURL: 'http://localhost:3000',
+  withCredentials: false,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+});
+
 export default {
   getPizzas() {
-    return axios.get("/api/v1/pizzas");
+    return instance.get("/api/v1/pizzas");
   },
   getCartItems() {
-    return axios.get("/api/v1/cart_items");
+    return instance.get("/api/v1/cart_items");
   },
   addItemToCart(pizzaId) {
-    return axios.post("/api/v1/cart_items", { pizza_id: pizzaId });
+    return instance.post("/api/v1/cart_items", { pizza_id: pizzaId });
   },
   deleteItemFromCart(id) {
-    return axios.delete(`/api/v1/cart_items/${id}`);
+    return instance.delete(`/api/v1/cart_items/${id}`);
   },
   UpdateItemQuantityInCart(id, newQuantity) {
-    return axios.patch(`/api/v1/cart_items/${id}`, { quantity: newQuantity });
+    return instance.patch(`/api/v1/cart_items/${id}`, { quantity: newQuantity });
   },
 };

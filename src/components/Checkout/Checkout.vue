@@ -15,8 +15,9 @@
                 class="list-group-item d-flex justify-content-between lh-sm"
               >
                 <div>
-                  <h6 class="my-0">{{ products[item.pizza_id].name }} (${{ products[item.pizza_id].price }} x
-                    {{ item.quantity }})</h6>
+                  <h6 class="my-0">
+                    {{ products[item.pizza_id].name }} (${{ products[item.pizza_id].price }} x {{ item.quantity }})
+                  </h6>
                 </div>
                 <span class="text-muted">${{ products[item.pizza_id].price * item.quantity }}</span>
               </li>
@@ -28,7 +29,7 @@
           </div>
           <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Billing address</h4>
-            <form _lpchecked="1" class="needs-validation" novalidate="">
+            <form class="needs-validation" novalidate="">
               <div class="row g-3">
                 <div class="col-sm-6">
                   <label class="form-label" for="firstName">First name</label>
