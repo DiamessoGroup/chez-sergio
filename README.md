@@ -10,6 +10,8 @@ Live Link : [https://chez-sergio.herokuapp.com/](https://chez-sergio.herokuapp.c
 Rails
 Repository: [https://github.com/DiamessoGroup/chez-sergio-rails](https://github.com/DiamessoGroup/chez-sergio-rails)
 
+[Watch Application Walkthrough on YouTube](https://youtu.be/IvhBR-m4Nrk)
+
 ## Table of contents
 
 - [General info](#general-info)
@@ -36,6 +38,8 @@ makes use of router for fast navigation and vuex for easy state management.
 - SCSS
 - Bootstrap
 - W3.CSS
+- Jest
+- Cypress
 
 ## Setup
 
